@@ -15,12 +15,25 @@ export class TodosComponent implements OnInit {
   ) {}
 
   todos: Todo[];
-
+  
   fetchTodos(): void {
     this.todosService.getTodos().then( todos => {
       this.todos = todos;
-      console.log(this.todos);
     });
+  }
+
+  completeTodo(todo) {
+    todo.completed = !todo.completed;
+    this.todosService.completeTodo(todo);
+  }
+
+  updateTodo(todo) {
+    todo.completed = !todo.completed;
+    this.todosService.updateTodo(todo);
+  }
+
+  editMode(todo) {
+    todo.editMode = true;
   }
   
   ngOnInit() {

@@ -9,6 +9,8 @@ import { Todo } from './todo';
 export class TodosService {
 
   private TODO_URL = 'https://todo-api-bb.herokuapp.com';  // URL to web api
+  private headers = new Headers({'Content-Type': 'application/json'});
+
 
   constructor(private http: Http) { }
 
@@ -21,6 +23,20 @@ export class TodosService {
                   }
                 )
                .catch(this.handleError);
+  }
+
+  completeTodo(todo: Todo): Promise<Todo> {
+    return this.http
+              .put(this.TODO_URL + '/todos/' + todo.id, JSON.stringify(todo), {headers: this.headers})
+              .toPromise()
+              .then((res) => console.log(res.json()));
+  }
+
+  updateTodo(todo: Todo): Promise<Todo> {
+    return this.http
+              .put(this.TODO_URL + '/todos/' + todo.id, JSON.stringify(todo), {headers: this.headers})
+              .toPromise()
+              .then((res) => console.log(res.json()));
   }
 
   handleError(): void {

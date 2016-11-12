@@ -1,7 +1,25 @@
 <div class="container">
     <ul class="list-group">
         <li *ngFor="let todo of todos" class="list-group-item">
-            {{ todo.description }} - {{ todo.completed }}
+            <input 
+                [(ngModel)]="todo.description"
+                type="text" 
+                *ngIf="todo.editMode" 
+                value="{{todo.description}}">
+            <span *ngIf="!todo.editMode">{{todo.description}}</span> - 
+            <i (click)="completeTodo(todo)" 
+                class="fa fa-2x" 
+                [class.fa-circle-thin]="!todo.completed" 
+                [class.fa-check-circle-o]="todo.completed" 
+                *ngIf="!todo.editMode"></i> - 
+            <i 
+                class="fa fa-pencil fa-2x" 
+                (click)="editMode(todo)" 
+                *ngIf="!todo.editMode"></i>
+            <i 
+                class="fa fa-save fa-2x" 
+                *ngIf="todo.editMode" 
+                (click)="todo.editMode = !todo.editMode;"></i>
         </li>
     </ul>
 </div>
