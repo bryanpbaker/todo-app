@@ -19,7 +19,12 @@
             <i 
                 class="fa fa-save fa-2x" 
                 *ngIf="todo.editMode" 
-                (click)="todo.editMode = !todo.editMode;"></i>
+                (click)="updateTodo(todo)"></i>
+            <i 
+                class="fa fa-close fa-2x" 
+                *ngIf="todo.editMode" 
+                (click)="deleteTodo(todo)"></i>
         </li>
     </ul>
+    <new-todo *ngIf="newTodoMode"></new-todo>
 </div>

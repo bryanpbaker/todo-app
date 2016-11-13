@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { NewTodoComponent } from '../new-todo/new-todo.component';
+
 import { Todo } from '../todo';
 import { TodosService } from '../todos.service';
 
@@ -17,9 +19,13 @@ export class TodosComponent implements OnInit {
   todos: Todo[];
   
   fetchTodos(): void {
-    this.todosService.getTodos().then( todos => {
+    this.todosService.getTodos().subscribe( todos => {
       this.todos = todos;
     });
+  }
+
+  createTodo(todo) {
+    this.todosService.createTodo(todo);
   }
 
   completeTodo(todo) {
@@ -28,8 +34,12 @@ export class TodosComponent implements OnInit {
   }
 
   updateTodo(todo) {
-    todo.completed = !todo.completed;
+    todo.editMode = !todo.editMode;
     this.todosService.updateTodo(todo);
+  }
+
+  deleteTodo(todo) {
+    this.todosService.deleteTodo(todo);
   }
 
   editMode(todo) {
@@ -37,6 +47,10 @@ export class TodosComponent implements OnInit {
   }
   
   ngOnInit() {
+    this.fetchTodos();
+  }
+
+  ngOnChanges() {
     this.fetchTodos();
   }
 

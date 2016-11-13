@@ -10,6 +10,7 @@ import { TodosService } from './todos.service';
 import { HomePageComponent } from './home-page/home-page.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
+import { NewTodoComponent } from './new-todo/new-todo.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ProfilePageComponent } from './profile-page/profile-page.component';
     TodosComponent,
     HomePageComponent,
     ProfileComponent,
-    ProfilePageComponent
+    ProfilePageComponent,
+    NewTodoComponent
   ],
   imports: [
     BrowserModule,
