@@ -2,12 +2,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { TodosComponent } from './todos/todos.component';
 import { TodosService } from './todos.service';
-import { HomePageComponent } from './home-page/home-page.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { NewTodoComponent } from './new-todo/new-todo.component';
@@ -17,7 +17,6 @@ import { NewTodoComponent } from './new-todo/new-todo.component';
     AppComponent,
     NavbarComponent,
     TodosComponent,
-    HomePageComponent,
     ProfileComponent,
     ProfilePageComponent,
     NewTodoComponent
@@ -25,7 +24,17 @@ import { NewTodoComponent } from './new-todo/new-todo.component';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    RouterModule.forRoot([
+      {
+        path: '',
+        component: TodosComponent
+      },
+      {
+        path: 'new',
+        component: NewTodoComponent
+      }
+    ])
   ],
   providers: [
     TodosService

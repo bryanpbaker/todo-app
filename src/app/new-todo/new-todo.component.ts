@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'new-todo',
@@ -7,7 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NewTodoComponent implements OnInit {
 
+  private location: Location
+  private route: ActivatedRoute
+
   constructor() { }
+
+  addTodo(): void {
+    this.location.back();
+  }
 
   ngOnInit() {
   }
