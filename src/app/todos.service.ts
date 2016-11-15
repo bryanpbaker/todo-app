@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 import { Todo } from './todo';
-
+import * as _ from 'lodash';
 
 @Injectable()
 export class TodosService {
@@ -15,12 +15,14 @@ export class TodosService {
 
   constructor(private http: Http) { }
 
+  todoList;
+
   getTodos(): Observable<Todo[]> {
     return this.http
                .get(this.TODO_URL + '/todos')
                .map( response => {
-                 var todoList = response.json();
-                 return todoList;
+                 this.todoList = response.json();
+                 return this.todoList;
                });
   }
 
@@ -51,8 +53,7 @@ export class TodosService {
               .delete(this.TODO_URL + '/todos/' + todo.id)
               .toPromise()
               .then((res) => {
-                this.getTodos();
-                console.log(res)
+                console.log(res);
               }); 
   }
 

@@ -6,24 +6,26 @@
                 type="text" 
                 *ngIf="todo.editMode" 
                 value="{{todo.description}}">
-            <span *ngIf="!todo.editMode">{{todo.description}}</span> - 
-            <i (click)="completeTodo(todo)" 
-                class="fa fa-2x" 
-                [class.fa-circle-thin]="!todo.completed" 
-                [class.fa-check-circle-o]="todo.completed" 
-                *ngIf="!todo.editMode"></i> - 
-            <i 
-                class="fa fa-pencil fa-2x" 
-                (click)="editMode(todo)" 
-                *ngIf="!todo.editMode"></i>
-            <i 
-                class="fa fa-save fa-2x" 
-                *ngIf="todo.editMode" 
-                (click)="updateTodo(todo)"></i>
-            <i 
-                class="fa fa-close fa-2x" 
-                *ngIf="todo.editMode" 
-                (click)="deleteTodo(todo)"></i>
+            <span *ngIf="!todo.editMode">{{todo.description}}</span>
+            <div class="pull-right">
+                <i (click)="completeTodo(todo)" 
+                    class="fa fa-2x" 
+                    [class.fa-circle-thin]="!todo.completed" 
+                    [class.fa-check-circle-o]="todo.completed" 
+                    *ngIf="!todo.editMode"></i>
+                <i 
+                    class="fa fa-pencil fa-2x" 
+                    (click)="editMode(todo)" 
+                    *ngIf="!todo.editMode"></i>
+                <i 
+                    class="fa fa-save fa-2x" 
+                    *ngIf="todo.editMode" 
+                    (click)="updateTodo(todo)"></i>
+                <i 
+                    class="fa fa-close fa-2x" 
+                    *ngIf="!todo.editMode" 
+                    (click)="deleteTodo(todo)"></i>
+            </div>
         </li>
     </ul>
     <new-todo *ngIf="newTodoMode"></new-todo>

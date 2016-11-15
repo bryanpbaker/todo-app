@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import * as _ from 'lodash';
 
 import { NewTodoComponent } from '../new-todo/new-todo.component';
 
@@ -40,6 +41,7 @@ export class TodosComponent implements OnInit {
 
   deleteTodo(todo) {
     this.todosService.deleteTodo(todo);
+    this.todos = _.without(this.todos, todo);
   }
 
   editMode(todo) {
