@@ -3,6 +3,9 @@
     <div class="form-group">
       <input type="text" class="form-control" #todoDescription>
     </div>
-    <button type="submit" class="btn btn-primary" (click)="addTodo(todoDescription.value); todoDescription.value=''">Submit</button>
+    <button class="btn waves-effect waves-light" type="submit" (click)="addTodo(todoDescription.value); todoDescription.value=''">Done
+      <i class="material-icons right">done</i>
+    </button>
+    <button class="waves-effect waves-light btn red">Cancel</button>
   </form>
 </div>

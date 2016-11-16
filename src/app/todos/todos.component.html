@@ -1,6 +1,6 @@
 <div class="container">
     <h5>Here are your todos...</h5>
-    <ul class="collection">
+    <ul class="collection z-depth-2">
         <li *ngFor="let todo of todos" class="collection-item" [class.bg-danger]="todo.completed">
             <b *ngIf="todo.editMode">Editing:</b>
             <span *ngIf="!todo.editMode" class="description">{{todo.description}}</span>
