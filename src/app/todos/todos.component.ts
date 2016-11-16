@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, trigger, state, style, transition, animate } from '@angular/core';
 import * as _ from 'lodash';
 
 import { NewTodoComponent } from '../new-todo/new-todo.component';
@@ -9,7 +9,21 @@ import { TodosService } from '../todos.service';
 @Component({
   selector: 'todos',
   templateUrl: './todos.component.html',
-  styleUrls: ['./todos.component.scss']
+  styleUrls: ['./todos.component.scss'],
+  animations: [
+    trigger('editControlsState', [
+      state('closed', style({
+        height: '0',
+        opacity: '0'
+      })),
+      state('open', style({
+        height: '105px',
+        opacity: '1'
+      })),
+      transition('closed => open', animate('500ms ease-in')),
+      transition('open => closed', animate('500ms ease-out')),
+    ])
+  ]
 })
 export class TodosComponent implements OnInit {
 
@@ -22,6 +36,9 @@ export class TodosComponent implements OnInit {
   fetchTodos(): void {
     this.todosService.getTodos().subscribe( todos => {
       this.todos = todos;
+      this.todos.forEach(todo => {
+        todo.editControlsState = 'closed';
+      });
     });
   }
 
@@ -35,17 +52,28 @@ export class TodosComponent implements OnInit {
   }
 
   updateTodo(todo) {
-    todo.editMode = !todo.editMode;
     this.todosService.updateTodo(todo);
+    todo.editControlsState = (todo.editControlsState === 'open' ? 'closed' : 'open');
+    setTimeout(() => {
+      todo.editMode = !todo.editMode;
+    }, 300)
   }
 
   deleteTodo(todo) {
-    this.todosService.deleteTodo(todo);
-    this.todos = this.todos.filter(t => t !== todo);
+    if(confirm('You sure?') === true) {
+      this.todosService.deleteTodo(todo);
+      this.todos = this.todos.filter(t => t !== todo);
+      todo.editControlsState = (todo.editControlsState === 'closed' ? 'open' : 'closed');
+      todo.editMode = !todo.editMode;
+    }
   }
 
   editMode(todo) {
-    todo.editMode = true;
+    todo.editControlsState = (todo.editControlsState === 'open' ? 'closed' : 'open');
+    setTimeout(() => {
+      todo.editMode = true;
+    }, 200)
+    console.log(todo.editControlsState);
   }
   
   ngOnInit() {

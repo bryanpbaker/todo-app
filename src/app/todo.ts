@@ -4,4 +4,5 @@ export class Todo {
     completed: boolean;
     createdAt: string;
     updatedAt: string;
+    editControlsState: string;
 }

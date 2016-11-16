@@ -1,33 +1,37 @@
 <div class="container">
     <h5>Here are your todos...</h5>
-    <small class="hide-on-large-only">(Tap to complete!)</small>
-    <small class="hide-on-med-and-down">(Click to complete!)</small>
     <ul class="collection">
         <li *ngFor="let todo of todos" class="collection-item" [class.bg-danger]="todo.completed">
-            <input 
-                [(ngModel)]="todo.description"
-                type="text" 
-                *ngIf="todo.editMode" 
-                value="{{todo.description}}">
-            <span class="description" *ngIf="!todo.editMode">{{todo.description}}</span>
-            <a 
-                class="secondary-content"
-                (click)="editMode(todo)" 
-                *ngIf="!todo.editMode">
-                <i class="material-icons">mode_edit</i>
-            </a>
-            <a 
-                class="secondary-content"
-                *ngIf="todo.editMode" 
-                (click)="deleteTodo(todo)">    
-                <i class="material-icons">delete</i>
-            </a>
-            <a 
-                class="secondary-content"
-                *ngIf="todo.editMode" 
-                (click)="updateTodo(todo)">
-                <i class="fa fa-check fa-2x"></i>
-            </a>
+            <b *ngIf="todo.editMode">Editing:</b>
+            <span *ngIf="!todo.editMode" class="description">{{todo.description}}</span>
+                <a 
+                    class="secondary-content"
+                    (click)="editMode(todo)" 
+                    *ngIf="!todo.editMode">
+                    <i class="material-icons">mode_edit</i>
+                </a>
+                <div 
+                    class="edit-controls" 
+                    [class.open]="todo.editMode"
+                    [@editControlsState]="todo.editControlsState">
+                    <input 
+                    [(ngModel)]="todo.description"
+                    type="text" 
+                    *ngIf="todo.editMode" 
+                    value="{{todo.description}}">
+                    <a 
+                        class="secondary-content"
+                        *ngIf="todo.editMode" 
+                        (click)="deleteTodo(todo)">    
+                        <i class="material-icons red-text">delete</i>
+                    </a>
+                    <a 
+                        class="secondary-content"
+                        *ngIf="todo.editMode" 
+                        (click)="updateTodo(todo)">
+                        <i class="material-icons teal-text">thumb_up</i>
+                    </a>
+                </div>
             <!--<a 
                 class="secondary-content"
                 (click)="completeTodo(todo)"
