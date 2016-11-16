@@ -41,7 +41,7 @@ export class TodosComponent implements OnInit {
 
   deleteTodo(todo) {
     this.todosService.deleteTodo(todo);
-    this.todos = _.without(this.todos, todo);
+    this.todos = this.todos.filter(t => t !== todo);
   }
 
   editMode(todo) {

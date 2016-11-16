@@ -26,12 +26,12 @@ export class TodosService {
                });
   }
 
-  createTodo(todo: Todo) {
-    // return this.http
-    //           .post(this.TODO_URL + '/todos', todo)
-    //           .toPromise()
-    //           .then(res => console.log(res));
-    console.log(todo);
+  createTodo(todo: Todo): Promise<Todo> {
+    return this.http
+            .post(this.TODO_URL + '/todos', JSON.stringify({description: todo, completed: false}))
+            .toPromise()
+            .then(res => res.json());
+    
   }
 
   completeTodo(todo: Todo): Promise<Todo> {

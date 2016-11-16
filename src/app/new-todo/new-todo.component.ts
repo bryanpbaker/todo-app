@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 
+import { Todo } from '../todo';
+import { TodosService } from '../todos.service';
+
 @Component({
   selector: 'new-todo',
   templateUrl: './new-todo.component.html',
@@ -9,12 +12,18 @@ import { Location } from '@angular/common';
 })
 export class NewTodoComponent implements OnInit {
 
-  private location: Location
-  private route: ActivatedRoute
+  constructor(
+    private location: Location,
+    private route: ActivatedRoute,
+    private todosService: TodosService
+  ) { }
 
-  constructor() { }
+  addTodo(todo: Todo): void {
+    
+    if(!todo) { return; }
 
-  addTodo(): void {
+    this.todosService.createTodo(todo)
+
     this.location.back();
   }
 
